@@ -1,19 +1,16 @@
 <?php
-	$obj = new example;
-	$obj->name = "steve";
-
-	print_r($obj);
-
-	$obj2 = new example("Yazeed");
-
+	$obj1 = new example();
+	$obj->name = "Steve";
+	$obj->printHelloWorld();
+	
 	class example {
-	
-	public $name;
-	
-		function __construct($name) {
-			$this->name = $name;
-			echo "Hello World" . $name . "<br>";
+		public $name;
+		public function __construct() {
+			echo "Hello World..." . $this->name;
+		}
+
+		public function printHelloWorld() {
+			echo "Hello World..." . $this->name . "\n";
 		}
 	}
-	echo "hello world!";
 ?>
