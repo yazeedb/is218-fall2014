@@ -1,8 +1,27 @@
 <?php
-	$car = new taurus;
+	$car_orders[0]['model'] = "taurus";
+	$car_orders[0]['engine'] = 'V6';
+	$car_orders[0]['color'] = 'blue';
+	
+	$car_orders[1]['model'] = "taurus";
+	$car_orders[1]['engine'] = 'Mustang';
+	$car_orders[1]['color'] = 'blue';
+
+	$car_orders[2]['model'] = "taurus";
+	$car_orders[2]['engine'] = 'Focus';
+	$car_orders[2]['color'] = 'blue';
+
+	foreach ($car_orders as $car_order) {
+		foreach($car_order as $key => $value) {
+			echo $key . ': ' . $value . "<br>";
+		}	
+		echo '<br>';
+	}
+	
+
+	$car = new $car_order['model'];
 	$car->setColor("blue");
 	print_r($car);
-	//echo $car->make;
 
 	abstract class car {
 		protected $engine;
