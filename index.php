@@ -16,12 +16,22 @@
 				fclose($handle); //close the file
 			} //end if
 
-			foreach($rows as $row) { 
-				foreach($row as $key => $value) { //$key is header, $value is data
-					echo $key . ": " . $value . "<br>"; //display the header next to its data
+			if(empty($_GET)) {	
+				foreach($rows as $row) {
+					$i++;
+					$universityNum = $i - 1;
+					echo '<a href="http://localhost:8888/is218/challenge1/?university=' . $universityNum . '">' . $row['INSTNM'] . '</a>' . "<br>";
 				}
-				echo "<hr>"; //after each set, break it up with a horizontal line
-			} //end foreach
+			}
+
+			/*echo "<pre>";
+			var_dump($rows);
+			echo "</pre>";*/
+
+			$row = $rows[$_GET["university"]];
+			foreach($row as $key => $value) {
+				echo $key . ": " . $value . "<br>";
+			}
 
 		} //end function
 	} //end class
