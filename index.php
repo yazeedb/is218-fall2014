@@ -20,13 +20,9 @@
 				foreach($rows as $row) {
 					$i++;
 					$universityNum = $i - 1;
-					echo '<a href="http://localhost:8888/is218/challenge1/?university=' . $universityNum . '">' . $row['INSTNM'] . '</a>' . "<br>";
+					echo '<a href="' . $_SERVER['PHP_SELF'] . '/?university=' . $universityNum . '">' . $row['INSTNM'] . '</a>' . "<br>";
 				}
 			}
-
-			/*echo "<pre>";
-			var_dump($rows);
-			echo "</pre>";*/
 
 			$row = $rows[$_GET["university"]];
 			foreach($row as $key => $value) {
