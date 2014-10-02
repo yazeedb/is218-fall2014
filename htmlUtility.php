@@ -1,17 +1,19 @@
 <?php
+	ini_set('display_errors', 1);
+	ini_set('display_errors', TRUE);
 	class Html 
 	{
-		public static function makeLink($records) {
+		public static function makeLink($rows, $getVar, $universityName) {
 			$i = -1;
-			foreach($records as $record) {
+			foreach($rows as $row) {
 				$i++;
-				echo '<a href="?university=' . $i . '">' . $record["INSTNM"] . '</a>' . '<br>'; 
+				echo '<a href="?' . $getVar . '=' . $i . '">' . $row[$universityName] . '</a>' . '<br>'; 
 			}
 		}
 
-		public static function makeTable($record) {
+		public static function makeTable($row) {
 			echo "<table>";
-			foreach($record as $key => $value) {
+			foreach($row as $key => $value) {
 				echo "<tr>";
 				echo "<th>" . $key . "</th>";
 				echo "<td>" . $value . "</td>";
