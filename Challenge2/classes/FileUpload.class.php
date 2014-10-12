@@ -1,15 +1,15 @@
 <?php
-	ini_set('display_errors', 1);
-	ini_set('display_errors', TRUE);
-
 	class FileUpload
 	{
-		public static function fileOpen($fileName, $parameter) {
-			$handle = fopen($filename, $parameter);
+		protected $handle;
+
+		public static function uploadFile($fileName, $mode) {
+			$handle = fopen($fileName, $mode);
+			return $handle;
 		}
 
 		public static function fileClose($handle) {
 			fclose($handle);
-		}	
+		}
 	}
 ?>
