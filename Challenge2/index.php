@@ -1,14 +1,14 @@
 <?php
-	ini_set('display_errors', 1);
-	ini_set('display_errors', TRUE);
-
-	require 'init.php';
+	require 'classes/Autoloader.php';
 
 	$fileName = 'schoolData.csv';
 	$mode = 'r';
 
-	$file = new FileRead();
-	$records = $file->fileRead($fileName, $mode);
+	$dictionary = new FileRead();
+	$dictionaryNames = $dictionary->fileRead('hd2013/varlist.csv', $mode);
+
+	$csvFile = new FileRead();
+	$records = $csvFile->fileRead($fileName, $mode, TRUE);
 
 	if(empty($_GET)) {
 		echo MakeLinks::linkMaker($records, 'university', 'INSTNM');
