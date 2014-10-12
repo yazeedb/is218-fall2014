@@ -2,10 +2,7 @@
 	ini_set('display_errors', 1);
 	ini_set('display_errors', TRUE);
 
-	require 'classes/FileUpload.class.php';
-	require 'classes/FileRead.class.php';
-	require 'classes/MakeLinks.class.php';
-	require 'classes/MakeTable.class.php';
+	require 'init.php';
 
 	$fileName = 'schoolData.csv';
 	$mode = 'r';
