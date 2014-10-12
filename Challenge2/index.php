@@ -4,7 +4,8 @@
 
 	require 'classes/FileUpload.class.php';
 	require 'classes/FileRead.class.php';
-	require 'classes/FilePrint.class.php';
+	require 'classes/MakeLinks.class.php';
+	require 'classes/MakeTable.class.php';
 
 	$fileName = 'schoolData.csv';
 	$mode = 'r';
@@ -12,5 +13,9 @@
 	$file = new FileRead();
 	$records = $file->fileRead($fileName, $mode);
 
-	FilePrint::printFile($records);
+	if(empty($_GET)) {
+		echo MakeLinks::linkMaker($records, 'university', 'INSTNM');
+	} else {
+		echo MakeTable::tableMaker($records[$_GET['university']]);
+	}
 ?>
