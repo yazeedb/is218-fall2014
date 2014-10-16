@@ -1,6 +1,10 @@
 <?php
+	require 'includes/header.php';
 	require 'classes/Autoloader.php';
+?>
 
+<div id="schoolRecords">
+<?php
 	$fileName = 'schoolData.csv';
 	$mode = 'r';
 
@@ -15,4 +19,9 @@
 	} else {
 		echo MakeTable::tableMaker($records[$_GET['university']]);
 	}
+?>
+</div>
+<div id="recordResult"></div>
+<?php
+	require 'includes/footer.php';
 ?>
