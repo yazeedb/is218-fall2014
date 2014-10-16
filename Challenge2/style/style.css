@@ -1,0 +1,15 @@
+#schoolRecords {
+	max-height: 450px;
+	width: 30%;
+	overflow-y: scroll;
+	float: left;
+}
+
+#recordResult {
+	max-height: 450px;
+	margin-left: 20%;
+	width: 50%;
+	overflow-x: scroll;
+	overflow-y: scroll;
+	float: right;
+}
