@@ -1,4 +1,6 @@
 <?php
+	namespace classes;
+
 	class MakeTable
 	{
 		public static function tableMaker(Array $record) {
