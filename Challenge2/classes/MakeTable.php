@@ -7,7 +7,7 @@
 			echo '<table>';
 				foreach($record as $key => $value) {
 					echo '<tr>';
-						echo '<th>' . $key . '<th>';
+						echo '<th>' . $key . '</th>';
 						echo '<td>' . $value . '</td>';
 					echo '</tr>';
 				}
