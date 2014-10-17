@@ -1,4 +1,6 @@
 <?php
+	namespace classes;
+
 	class MakeLinks
 	{
 		public static function linkMaker(Array $records, $getVar, $universityName) {
