@@ -3,6 +3,7 @@
 	require 'classes/Autoloader.php';
 ?>
 
+<h1 id="schoolH1">School Records</h1> <br><br>
 <div id="schoolRecords">
 <?php
 	$fileName = 'schoolData.csv';
@@ -21,7 +22,9 @@
 	}
 ?>
 </div>
-<div id="recordResult"></div>
+<div id="recordResult">
+	<h1>Select a School</h1>
+</div>
 <?php
 	require 'includes/footer.php';
 ?>
