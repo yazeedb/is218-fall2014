@@ -1,7 +1,6 @@
 <?php
 	ini_set('display_errors', 1);
-	require_once('twitter_api_php/TwitterAPIExchange.php');
-	require('classes/MakeTable.php');
+	require 'Autoloader.php';
 
 	$settings = array(
 			'oauth_access_token' => '2846540043-oYkK23FRlRntEGt6zyx7Ez3bMpdswS1PMNhyBW4',
@@ -17,18 +16,18 @@
 
 	$requestMethod = 'GET';
 
-	$getField = '?screen_name=kdtrey5';
+	$getField = '?screen_name=treehouse';
 
-	$twitter = new TwitterAPIExchange($settings);
+	$twitter = new classes\twitter_api_php\TwitterAPIExchange($settings);
 
 	$string = json_decode($twitter->setGetField($getField)
 						->buildOauth($url, $requestMethod)->performRequest(), $assoc = TRUE);
 
-	echo '<pre>';
+	/*echo '<pre>';
 	print_r($string);
-	echo '</pre>';
+	echo '</pre>';*/
 
-	$userProfile = MakeTable::tableMaker($string[0]['user']);
+	$userTweets = classes\MakeTable::printTweets($string);
 
-	echo $userProfile;
+	echo $userTweets;
 ?>
