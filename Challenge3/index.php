@@ -6,7 +6,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <?php
-	ini_set('display_errors', 1);
+	//ini_set('display_errors', 1);
+	error_reporting(E_ERROR | E_WARNING | E_PARSE);
 	require 'Autoloader.php';
 
 	$settings = array(
@@ -31,8 +32,16 @@
 						->buildOauth($url, $requestMethod)->performRequest(), $assoc = TRUE);
 
 	$userTweets = classes\HtmlPrinter::printTweets($string);
+	$userProfile = classes\HtmlPrinter::printProfile($string);
 ?>
 
 <div class="container-fluid">
-	<?php echo $userTweets; ?>
+	<?php 
+		echo $userProfile;
+	?>
+</div>
+<div class="container-fluid">
+	<?php 
+		echo $userTweets; 
+	?>
 </div>
