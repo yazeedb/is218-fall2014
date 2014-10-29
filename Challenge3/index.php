@@ -6,42 +6,51 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <?php
-	//ini_set('display_errors', 1);
-	error_reporting(E_ERROR | E_WARNING | E_PARSE);
+	ini_set('display_errors', 1);
 	require 'Autoloader.php';
-
-	$settings = array(
-			'oauth_access_token' => '2846540043-oYkK23FRlRntEGt6zyx7Ez3bMpdswS1PMNhyBW4',
-
-			'oauth_access_token_secret' => '0mXvuH3o5DmZoYBGrwh7kDUtZny5EW3tLmBrWzgZyfoMp',
-
-			'consumer_key' => 'KrY9GGoCeiKDONDjSeqTcn2f3',
-
-			'consumer_secret' => 'xgHnhi4Aw8TE6GBAbgyKZezaYe4fXZBZWuE8DrP4AOBbfA41rs'
-		);
+	require 'classes/twitter_api_php/config/config.php';
 
 	$url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
+	$url2 = 'https://api.twitter.com/1.1/statuses/update.json';
 
 	$requestMethod = 'GET';
+	$requestMethod2 = 'POST';
 
 	$getField = '?screen_name=treehouse';
+	$postField = $_POST;
 
 	$twitter = new classes\twitter_api_php\TwitterAPIExchange($settings);
 
-	$string = json_decode($twitter->setGetField($getField)
+	$getString = json_decode($twitter->setGetField($getField)
 						->buildOauth($url, $requestMethod)->performRequest(), $assoc = TRUE);
+	//$postString = json_decode($twitter->setPostfields($postField)
+						//->buildOauth($url2, $requestMethod2)->performRequest(), $assoc = TRUE);
 
-	$userTweets = classes\HtmlPrinter::printTweets($string);
-	$userProfile = classes\HtmlPrinter::printProfile($string);
+	$getUserTweets = classes\HtmlPrinter::printTweets($getString);
+	$getUserProfile = classes\HtmlPrinter::printProfile($getString);
+
+	if(!empty($_POST)) {
+		print_r($_POST);
+	} else {
+		echo 'Nothing in post';
+	}
 ?>
 
 <div class="container-fluid">
 	<?php 
-		echo $userProfile;
+		echo $getUserProfile;
+		/*echo '<pre>';
+		print_r($twitter);
+		echo '</pre>';*/
 	?>
 </div>
 <div class="container-fluid">
 	<?php 
-		echo $userTweets; 
+		echo $getUserTweets; 
 	?>
 </div>
+<form action="index.php" method="POST">
+	<textarea id="tweetText" name="tweetText" rows="4" cols="50"></textarea> 
+	<br>
+	<input type="submit" name="submit" id="submit" value="Tweet this">
+</form>
