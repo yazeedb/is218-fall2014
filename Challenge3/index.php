@@ -9,52 +9,46 @@
 
 <div class="col-lg-3">
 	<div class="list-group">
-		<a href="?view=GET&url=https://api.twitter.com/1.1/statuses/home_timeline.json" class="list-group-item">
+		<a href="?view=GET&url=https://api.twitter.com/1.1/statuses/home_timeline.json" class="list-group-item" id="viewTimeline">
 			View timeline
 		</a>
-		<a href="?view=GET&url=https://api.twitter.com/1.1/statuses/user_timeline.json" class="list-group-item">
+		<a href="?view=GET&url=https://api.twitter.com/1.1/statuses/user_timeline.json" class="list-group-item" id="viewTweets">
 			View tweets
 		</a>
 	</div>
 </div>
 <?php
-	ini_set('display_errors', 1);
+	//ini_set('display_errors', 1);
 	require 'Autoloader.php';
 	require 'classes/twitter_api_php/config/config.php';
 
 	$url = $_GET['url'];
-	//$url2 = 'https://api.twitter.com/1.1/statuses/update.json';
+	$url2 = 'https://api.twitter.com/1.1/statuses/update.json';
 
 	$requestMethod = $_GET['view'];
-	//$requestMethod2 = 'POST';
+	$requestMethod2 = 'POST';
 
 	$getField = '?screen_name=yazeedbz1';
-	//$postFields = $_POST;
-
-	//$userGet = classes\TwitterHandler::get($settings, $getField, $url1, $requestMethod);
-	//$timelineGet = classes\TwitterHandler::get($settings, $getField, $url, $requestMethod);
-
-	//$finalPost = classes\TwitterHandler::post($settings, $postFields, $url2, $requestMethod2);
-
-	//$printTimeline = classes\HtmlPrinter::printTimeline($timelineGet);
+	$postFields = $_POST;
+	
 	if(!empty($_GET)) {
 		$userInfo = classes\TwitterHandler::get($settings, $getField, $url, $requestMethod);
 		echo classes\HtmlPrinter::printTimeline($userInfo);
 	}
-?>
 
-<div class="container-fluid">
-	<?php 
-		//echo $printTimeline;
-	?>
+	if(!empty($_POST)) {
+		$userTweet = classes\TwitterHandler::post($settings, $postFields, $url2, $requestMethod2);
+		echo 'Tweet successfully sent!';
+	}
+?>
+<div id="responseDiv">
 </div>
-<div class="container-fluid">
-	<?php 
-		//echo $getUserTimeline; 
-	?>
-</div>
+
+<br> <br>
 <form action="index.php" method="POST">
-	<textarea id="tweetText" name="status" rows="4" cols="50"></textarea> 
+	<textarea id="status" name="status" rows="4" cols="50"></textarea> 
 	<br>
-	<input type="submit" name="submit" id="submit" value="Tweet this">
+		<input type="submit" name="submit" id="submit" value="Tweet this">
 </form>
+
+<script type="text/javascript" src="app.js"></script>
