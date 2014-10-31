@@ -10,20 +10,21 @@
 <div class="col-lg-3">
 	<div class="list-group">
 		<a href="?view=GET&url=https://api.twitter.com/1.1/statuses/home_timeline.json" class="list-group-item" id="viewTimeline">
-			View timeline
+			View Timeline
 		</a>
 		<a href="?view=GET&url=https://api.twitter.com/1.1/statuses/user_timeline.json" class="list-group-item" id="viewTweets">
-			View tweets
+			View Tweets
+		</a>
+		<a href="?view=GET&url=https://api.twitter.com/1.1/followers/list.json" class="list-group-item" id="viewFollowers">
+			View Followers
 		</a>
 	</div>
 </div>
 
 <div class="container">
 <?php
-	//ini_set('display_errors', 1);
 	require 'Autoloader.php';
-	require 'classes/twitter_api_php/config/config.php';
-
+	ini_set('display_errors', 1);
 	$url = $_GET['url'];
 	$url2 = 'https://api.twitter.com/1.1/statuses/update.json';
 
@@ -34,8 +35,18 @@
 	$postFields = $_POST;
 
 	if(!empty($_GET)) {
+		$settings = \classes\twitter_api_php\config\config::settings();
 		$userInfo = classes\TwitterHandler::get($settings, $getField, $url, $requestMethod);
-		echo classes\HtmlPrinter::printTimeline($userInfo);
+
+		switch ($_GET['url']) {
+			case 'https://api.twitter.com/1.1/followers/list.json':
+				echo classes\HtmlPrinter::printFollowers($userInfo);
+				break;
+
+			default:
+				echo classes\HtmlPrinter::printTimeline($userInfo);
+				break;
+		}
 	}
 
 	if(!empty($_POST)) {
