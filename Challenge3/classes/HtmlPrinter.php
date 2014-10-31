@@ -16,16 +16,5 @@
 			
 			return $timelineVar;
 		} //end static function
-
-		public static function printTweets(Array $record) {
-			$tweetVar = '<img src="' . $record[0]['user']['profile_image_url'] . '">';
-			$tweetVar .= '<h1>Tweets by ' . $record[0]['user']['name'] . '</h1>';
-
-			foreach($record as $records) {
-				$tweetVar .= '<div class="row">' . $records['text'] . '</div>';
-			}
-
-			return $tweetVar;
-		} //end static function
 	}
 ?>
