@@ -17,6 +17,8 @@
 		</a>
 	</div>
 </div>
+
+<div class="container">
 <?php
 	//ini_set('display_errors', 1);
 	require 'Autoloader.php';
@@ -30,7 +32,7 @@
 
 	$getField = '?screen_name=yazeedbz1';
 	$postFields = $_POST;
-	
+
 	if(!empty($_GET)) {
 		$userInfo = classes\TwitterHandler::get($settings, $getField, $url, $requestMethod);
 		echo classes\HtmlPrinter::printTimeline($userInfo);
@@ -38,12 +40,10 @@
 
 	if(!empty($_POST)) {
 		$userTweet = classes\TwitterHandler::post($settings, $postFields, $url2, $requestMethod2);
-		echo 'Tweet successfully sent!';
+		echo '<h1>Tweet successfully sent!</h1>';
 	}
 ?>
-<div id="responseDiv">
 </div>
-
 <br> <br>
 <form action="index.php" method="POST">
 	<textarea id="status" name="status" rows="4" cols="50"></textarea> 
