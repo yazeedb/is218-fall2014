@@ -3,21 +3,18 @@
 
 	class HtmlPrinter
 	{
-		public static function printProfile(Array $record) {
-			$profileVar = '<table class="table table-hover">';
-			$index = -1;
+		public static function printTimeline(Array $record) {
+
+			$timelineVar = '';
 			foreach($record as $records) {
-				$index++;
-				if($index === 0) {
-					foreach($records['user'] as $key => $value) {
-						$profileVar .= '<tr><th>' . ucfirst($key) . '</th><td>' . $value . '</td></tr>'; 
-					}
-				}
+				$timelineVar .= '<div class="row">';
+				$timelineVar .= 'By ' . $records['user']['name'] . '<br>';
+				$timelineVar .= $records['text'] . '<br>';
+				$timelineVar .= $records['created_at'];
+				$timelineVar .= '</div>';
 			}
-
-			$profileVar .= '</table>';
-
-			return $profileVar;
+			
+			return $timelineVar;
 		} //end static function
 
 		public static function printTweets(Array $record) {
