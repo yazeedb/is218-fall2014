@@ -16,5 +16,18 @@
 			
 			return $timelineVar;
 		} //end static function
+
+		public static function printFollowers(array $record) {
+
+			$fArray = $record['users'];
+			$followersVar = '';
+
+			foreach($fArray as $records) {
+				$followersVar .= '<div class="row">';
+				$followersVar .= '@' . $records['screen_name'] . '<br><em>' . $records['name'] . '</em>';
+				$followersVar .= '</div>';
+			}
+			return $followersVar;	
+		}
 	}
 ?>
