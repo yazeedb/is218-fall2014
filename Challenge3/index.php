@@ -5,52 +5,56 @@
 	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+<h1>Twitter API</h1> <br><br>
+
+<div class="col-lg-3">
+	<div class="list-group">
+		<a href="?view=GET&url=https://api.twitter.com/1.1/statuses/home_timeline.json" class="list-group-item">
+			View timeline
+		</a>
+		<a href="?view=GET&url=https://api.twitter.com/1.1/statuses/user_timeline.json" class="list-group-item">
+			View tweets
+		</a>
+	</div>
+</div>
 <?php
 	ini_set('display_errors', 1);
 	require 'Autoloader.php';
 	require 'classes/twitter_api_php/config/config.php';
 
-	$url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
-	$url2 = 'https://api.twitter.com/1.1/statuses/update.json';
+	$url = $_GET['url'];
+	//$url2 = 'https://api.twitter.com/1.1/statuses/update.json';
 
-	$requestMethod = 'GET';
-	$requestMethod2 = 'POST';
+	$requestMethod = $_GET['view'];
+	//$requestMethod2 = 'POST';
 
-	$getField = '?screen_name=treehouse';
-	$postField = $_POST;
+	$getField = '?screen_name=yazeedbz1';
+	//$postFields = $_POST;
 
-	$twitter = new classes\twitter_api_php\TwitterAPIExchange($settings);
+	//$userGet = classes\TwitterHandler::get($settings, $getField, $url1, $requestMethod);
+	//$timelineGet = classes\TwitterHandler::get($settings, $getField, $url, $requestMethod);
 
-	$getString = json_decode($twitter->setGetField($getField)
-						->buildOauth($url, $requestMethod)->performRequest(), $assoc = TRUE);
-	//$postString = json_decode($twitter->setPostfields($postField)
-						//->buildOauth($url2, $requestMethod2)->performRequest(), $assoc = TRUE);
+	//$finalPost = classes\TwitterHandler::post($settings, $postFields, $url2, $requestMethod2);
 
-	$getUserTweets = classes\HtmlPrinter::printTweets($getString);
-	$getUserProfile = classes\HtmlPrinter::printProfile($getString);
-
-	if(!empty($_POST)) {
-		print_r($_POST);
-	} else {
-		echo 'Nothing in post';
+	//$printTimeline = classes\HtmlPrinter::printTimeline($timelineGet);
+	if(!empty($_GET)) {
+		$userInfo = classes\TwitterHandler::get($settings, $getField, $url, $requestMethod);
+		echo classes\HtmlPrinter::printTimeline($userInfo);
 	}
 ?>
 
 <div class="container-fluid">
 	<?php 
-		echo $getUserProfile;
-		/*echo '<pre>';
-		print_r($twitter);
-		echo '</pre>';*/
+		//echo $printTimeline;
 	?>
 </div>
 <div class="container-fluid">
 	<?php 
-		echo $getUserTweets; 
+		//echo $getUserTimeline; 
 	?>
 </div>
 <form action="index.php" method="POST">
-	<textarea id="tweetText" name="tweetText" rows="4" cols="50"></textarea> 
+	<textarea id="tweetText" name="status" rows="4" cols="50"></textarea> 
 	<br>
 	<input type="submit" name="submit" id="submit" value="Tweet this">
 </form>
