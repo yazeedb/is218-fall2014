@@ -2,7 +2,7 @@ body {
 	background-color: #f5f8fa;
 }
 
-img, h1 {
+img, h1, form, input[type=submit] {
 	display: inline;
 	margin: 2%;
 }
